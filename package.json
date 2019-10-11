@@ -4,10 +4,11 @@
   "description": "fyz front end ",
   "main": "./lib/app/index.js",
   "scripts": {
-    "dev:watch": "tsc -w",
+    "dev:watch": "tsc -w -p tsconfigBackend.json",
     "dev:css": "node-sass src/styles/styles.scss public/styles.css -w",
     "dev:server": "NODE_ENV=development nodemon ./lib/app/index.js",
-    "dev": "run-p dev:watch dev:server dev:css",
+    "dev:pack": "webpack -w",
+    "dev": "run-p dev:watch dev:server dev:css dev:pack",
     "start": "node ./lib/index.js",
     "test": "test"
   },
@@ -29,7 +30,10 @@
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.3",
     "npm-run-all": "^4.1.5",
-    "typescript": "^3.6.4"
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9"
   },
   "dependencies": {
     "express": "^4.17.1",

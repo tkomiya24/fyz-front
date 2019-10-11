@@ -17,7 +17,8 @@ app.use('/', (_, res) => {
                     <link rel="stylesheet" href="/styles.css" />
                 </head>
                 <body>
-                    ${ReactDomServer.renderToString(React.createElement(App))}
+                    <div id="react-root">${ReactDomServer.renderToString(React.createElement(App))}</div>
+                    <script src="/bundle.js"></script>
                 </body>
             </html>
         `

@@ -1,13 +1,8 @@
 {
     "compilerOptions": {
-        "outDir": "./lib",
-        "moduleResolution": "Node",
+        "moduleResolution": "node",
         "esModuleInterop": true,
         "jsx": "react",
-        "target": "es6",
-        "module": "commonjs"
-    },
-    "files": [
-        "./app/index.ts"
-    ]
+        "target": "es5"
+    }
 }
