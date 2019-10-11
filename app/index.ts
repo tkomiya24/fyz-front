@@ -7,7 +7,18 @@ import App from '../src/app';
 const app = express();
 
 app.use((_, res) => {
-    res.send(ReactDomServer.renderToString(React.createElement(App)));
+    res.send(
+        `
+            <html>
+                <head>
+                    <title>FYZ Chat</title>
+                </head>
+                <body>
+                    ${ReactDomServer.renderToString(React.createElement(App))}
+                </body>
+            </html>
+        `
+    );
 });
 
 app.listen(3000);
