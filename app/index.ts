@@ -6,12 +6,15 @@ import App from '../src/app';
 
 const app = express();
 
-app.use((_, res) => {
+app.use(express.static('./public'));
+
+app.use('/', (_, res) => {
     res.send(
         `
             <html>
                 <head>
                     <title>FYZ Chat</title>
+                    <link rel="stylesheet" href="/styles.css" />
                 </head>
                 <body>
                     ${ReactDomServer.renderToString(React.createElement(App))}
