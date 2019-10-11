@@ -1,0 +1,37 @@
+{
+  "name": "fyz-front",
+  "version": "1.0.0",
+  "description": "fyz front end ",
+  "main": "./lib/app/index.js",
+  "scripts": {
+    "dev:watch": "tsc -w",
+    "dev:server": "NODE_ENV=development nodemon ./lib/app/index.js",
+    "dev": "run-p dev:watch dev:server",
+    "start": "node ./lib/index.js",
+    "test": "test"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "redux",
+    "express",
+    "front",
+    "end",
+    "chat"
+  ],
+  "author": "Takeru Komiya",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "nodemon": "^1.19.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  }
+}
