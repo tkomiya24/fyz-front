@@ -1,27 +1,46 @@
 import React from 'react';
 
-class Home extends React.Component<{}, {messages: Array<String>, websocket: WebSocket}> {
+class Home extends React.Component<{}, {messages: Array<String>, websocket: WebSocket, inputMessage: string}> {
     constructor(props) {
         super(props);
         this.state = {
             messages: [],
-            websocket: null
+            websocket: null,
+            inputMessage: ''
         }
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
         console.log('mounted and connecting WS');
-        // const websocket = new WebSocket('localhost:8080');
-        // websocket.onmessage = event => {
-        //     this.setState({
-        //         messages: [
-        //             ...this.state.messages, 
-        //             event.data
-        //         ]
-        //     });
-        // };
-        // this.setState({
-        //     websocket
-        // });
+        const websocket = new WebSocket('ws://localhost:8080');
+        websocket.onmessage = event => {
+            this.setState({
+                messages: [
+                    ...this.state.messages, 
+                    ...JSON.parse(event.data)
+                ]
+            });
+        };
+        this.setState({
+            websocket
+        });
+    }
+    onSubmit(event) {
+        event.preventDefault();
+        console.log('submitting');
+        const {websocket, inputMessage} = this.state
+        if (!websocket || !inputMessage) {
+            return;
+        }
+        websocket.send(this.state.inputMessage);
+        console.log('submitted');
+        return false;
+    }
+    onChange(event) {
+        this.setState({
+            inputMessage: event.target.value
+        });
     }
     render() {
         return (
@@ -36,6 +55,12 @@ class Home extends React.Component<{}, {messages: Array<String>, websocket: WebS
                         <h1>Current Chat</h1>
                     </div>
                     {JSON.stringify(this.state.messages)}
+                    <form onSubmit={this.onSubmit}>
+                        <input
+                            type="text"
+                            onChange={this.onChange}
+                            value={this.state.inputMessage} />
+                    </form>
                 </main>
             </div>
         );
